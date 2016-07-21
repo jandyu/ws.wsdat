@@ -4,39 +4,33 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
 var log4js = require("./lib/log");
+var favicon = require('serve-favicon');
 
-const security = require('./lib/security');
+//initialization database connection
+var appConfig = require("./config/app.json");
+var database = require("./lib/database.js");
 
+var mysqltorest  = require('./lib/index.js');
+
+
+
+
+database.initDbConn();
 
 app.use(log4js.httplog);
 
-// view engine setup
-var adaro = require('adaro');
-
-app.set('views', path.join(__dirname, 'views'));
-
-var options = {
-    cache: false,
-    whitespace: true,
-    helpers: [
-        'dustjs-helpers' //installed modules
-    ]
-};
-app.engine('dust', adaro.dust(options));
-app.set('view engine', 'dust');
 
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
+app.use(favicon(path.join(__dirname, 'www', 'favicon.ico')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'www')));
 
 
-app.use("/uploads", express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static(path.join(__dirname, 'upload')));
 
 //manifest cache
 /*
@@ -66,14 +60,19 @@ app.all('*', function (req, res, next) {
 //security token
 app.use(require("./lib/authority"));
 
-
 //routes
-app.use('/', require('./routes/index'));
+app.use('/', require('./routes/index.js'));
 
+
+
+mysqltorest(app,'ktwy');
+
+
+//app.use(appConfig.restPrefix,require("./routes/wsdat.js"));
 
 //app.use('/api',require('./routes/api'));
 //mongodb-rest route
-require('./lib/rest')(app);
+//require('./lib/rest')(app);
 
 
 // catch 404 and forward to error handler

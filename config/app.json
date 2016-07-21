@@ -1,5 +1,37 @@
 {
   "name": "application-name",
   "version": "0.0.1",
-  "checkAuthToken":false
+  "checkAuthToken":false,
+
+
+
+
+  "restPrefix":"/rest",
+  "db": {
+    "bizerba": {
+      "driver": "mysql",
+      "config": {
+        "host"     : "localhost",
+        "user"     : "bizerba",
+        "password" : "bizerba",
+        "database" : "bizerba"
+      }
+    },
+    "ktwy": {
+      "driver": "mysql",
+      "config": {
+        "host"     : "localhost",
+        "user"     : "ktwy",
+        "password" : "ktwymysql",
+        "database" : "ktwy"
+      },
+      "custom":"./custom/custom.js"
+    },
+    "message":{
+      "driver":"mongo",
+      "config": "mongodb://localhost:27017/pilatus",
+      "custom":"./custom/custom.js"
+    }
+
+  }
 }

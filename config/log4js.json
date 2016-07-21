@@ -9,25 +9,25 @@
       "appenders": [
         {
           "type": "dateFile",
-          "filename": "log/wsdat.log",
+          "filename": "./log/wsdat.log",
           "pattern": "-yyyy-MM-dd",
           "category": "wsdat"
         },
         {
           "type": "dateFile",
-          "filename": "log/message.log",
+          "filename": "./log/message.log",
           "pattern": "-yyyy-MM-dd",
           "category": "message"
         },
         {
           "type": "dateFile",
-          "filename": "log/httpaccess.log",
+          "filename": "./log/httpaccess.log",
           "pattern": "-yyyy-MM-dd",
           "category": "http"
         },
         {
           "type": "dateFile",
-          "filename": "log/sqllog.log",
+          "filename": "./log/sqllog.log",
           "pattern": "-yyyy-MM-dd",
           "category": "sql"
         },
@@ -37,7 +37,7 @@
           "level": "ERROR",
           "appender": {
             "type": "file",
-            "filename": "log/errors.log"
+            "filename": "./log/errors.log"
           }
         }
       ]

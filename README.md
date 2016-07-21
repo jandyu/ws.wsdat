@@ -1,5 +1,5 @@
 # ws.wsdat
-refactoring WS Framework from C# to Node
+refactoring WS Framework base on Node
 
 
 ## C# framework
